@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import { Table } from 'react-bootstrap';
 
 function App() {
   const [entries, setEntries] = useState([]);
@@ -23,13 +24,34 @@ function App() {
       )
     }, [])
 
+  const 
   return (
     <div className="App">
 
       <body>
-        {entries.map((obj, index) => (
-          <p>{JSON.stringify(obj)}</p>
-        ))}
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>#</th>
+              {Object.keys(entries[0]).map((key, index) => (
+                <th>{key}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+              {entries.map((obj, index) => (
+                <tr>
+                  <td>{index}</td>
+                  {Object.keys(entries[0]).map((key, index) => (
+                    <td>{obj[key]}</td>
+                  ))}
+                </tr>
+              ))}
+          </tbody>
+
+
+        
+        </Table>
       </body>
     </div>
   );
