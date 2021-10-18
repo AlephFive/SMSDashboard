@@ -3,6 +3,18 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 
+function isValidHttpUrl(string) {
+  let url;
+  
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;  
+  }
+
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
 function App() {
   const [entries, setEntries] = useState([]);
 
@@ -44,8 +56,18 @@ function App() {
                 <tr>
                   <td>{index}</td>
                   {Object.keys(entries[0]).map((key, index) => (
-                    <td>{obj[key]}</td>
-                  ))}
+                     Array.isArray(obj[key])? <td>{obj[key].map((thing, i) => (
+
+                        isValidHttpUrl(thing)? <img src={thing} style={{"width":"100%",
+                          "max-width":"200px"}}></img>: 
+                        <span>{thing + ' '}</span>
+                     ))}</td> : 
+                     <td>{obj[key]}</td>
+                    
+                  ))
+                    
+                    
+                  }
                 </tr>
               ))}
           </tbody>
