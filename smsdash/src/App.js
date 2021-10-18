@@ -24,11 +24,12 @@ function App() {
       )
     }, [])
 
-  const 
+
   return (
     <div className="App">
 
       <body>
+        {entries.length > 0 ? 
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -51,7 +52,8 @@ function App() {
 
 
         
-        </Table>
+        </Table> : <p>Loading</p>
+        }
       </body>
     </div>
   );
